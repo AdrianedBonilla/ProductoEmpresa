@@ -1,18 +1,28 @@
-package com.example.ProductoEmpresa.Services;
+package com.example.productoempresa.services;
 
-import com.example.ProductoEmpresa.Entities.MovimientoDinero;
+import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import com.example.productoempresa.entities.MovimientoDinero;
+import com.example.productoempresa.repositories.RepositoryMovimientoDinero;
+
+@Service
 public class ServicioMovimientoDinero {
-    MovimientoDinero movimientoDinero1;
-    //Constructor
-    public ServicioMovimientoDinero(){
-        this.movimientoDinero1 = new MovimientoDinero(
-                100000,
-                "Mouse");
+
+
+    private RepositoryMovimientoDinero repositoryMovimientoDinero;
+
+    public ServicioMovimientoDinero(RepositoryMovimientoDinero repositoryMovimientoDinero){
+        this.repositoryMovimientoDinero = repositoryMovimientoDinero;
     }
 
-    //Método para visdualizatr el mobviemitn
-    public MovimientoDinero getMovimientoDinero(){
-        return this.movimientoDinero1;
+    public List<MovimientoDinero> getRepository(){
+        return this.repositoryMovimientoDinero.findAll();
     }
-}
+
+    public MovimientoDinero crearRegistro(MovimientoDinero mov){
+        return this.repositoryMovimientoDinero.save(mov);
+    }
+    }
+

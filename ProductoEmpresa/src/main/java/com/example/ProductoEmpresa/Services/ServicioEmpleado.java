@@ -1,26 +1,27 @@
-package com.example.ProductoEmpresa.Services;
+package com.example.productoempresa.services;
 
-import com.example.ProductoEmpresa.Entities.Empleado;
-import com.example.ProductoEmpresa.Entities.MovimientoDinero;
+import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import com.example.productoempresa.entities.Empleado;
+import com.example.productoempresa.repositories.RepositoryEmpleado;
+
+@Service
 public class ServicioEmpleado {
-    ServicioMovimientoDinero sMovDinero1 = new
-            ServicioMovimientoDinero() ;
-    Empleado emp1;
-    //Constructor
-    public ServicioEmpleado(){
-        MovimientoDinero movDinero1 =
-                this.sMovDinero1.getMovimientoDinero();
 
-//        this.emp1 = new Empleado("Jose",
-//                "jose@udea",
-//                "MoviTech",
-//                "Vendedor",
-//                movDinero1);
+    private RepositoryEmpleado repositoryEmpleado;
+
+    public ServicioEmpleado(RepositoryEmpleado repositoryEmpleado){
+        this.repositoryEmpleado = repositoryEmpleado;
     }
 
-    //Método para obtener el empleado
-    public Empleado getEmpleado(){
-        return this.emp1;
+    public List<Empleado> getRepository(){
+        return this.repositoryEmpleado.findAll();
     }
+
+    public Empleado crearRegistro(Empleado empleado){
+        return this.repositoryEmpleado.save(empleado);
+    }
+
 }

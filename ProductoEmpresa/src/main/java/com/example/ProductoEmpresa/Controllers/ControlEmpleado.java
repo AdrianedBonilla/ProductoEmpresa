@@ -1,23 +1,25 @@
-package com.example.ProductoEmpresa.Controllers;
+package com.example.productoempresa.controllers;
 
-import com.example.ProductoEmpresa.Entities.Empleado;
-import com.example.ProductoEmpresa.Services.ServicioEmpleado;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.productoempresa.entities.Empleado;
+import com.example.productoempresa.services.ServicioEmpleado;
+
 @RestController
 public class ControlEmpleado {
-    ServicioEmpleado sEmp1 = new ServicioEmpleado();
-    Empleado emp1;
 
-    //Constructor
-    public ControlEmpleado(){
-        this.emp1 = this.sEmp1.getEmpleado();
+
+    ServicioEmpleado sEmp1;
+    public ControlEmpleado(ServicioEmpleado sEmp1){
+        this.sEmp1 = sEmp1;
     }
-
+        
     //http://localhost:8080/empleado
     @GetMapping("/empleado")
-    public Empleado empleado(){
-        return this.emp1;
+    public List<Empleado> empl(){
+        return this.sEmp1.getRepository();
     }
 }

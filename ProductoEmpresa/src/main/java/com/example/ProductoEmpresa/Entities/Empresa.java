@@ -1,6 +1,12 @@
-package com.example.ProductoEmpresa.Entities;
+package com.example.productoempresa.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name="Empresa")
@@ -21,7 +27,7 @@ public class Empresa {
     private String nit;
 
     @Column(name = "telefono")
-    private int telefono;
+    private String telefono;
 
     @Transient
     //objeto empleado
@@ -29,12 +35,24 @@ public class Empresa {
 
     //Constructor
 
-    public Empresa(String nombre, String direccion, String nit, int telefono, Empleado empleado1) {
+    public Empresa() {
+    }   
+
+    public Empresa(long id, String nombre, String direccion, String nit, String telefono, Empleado empleado1) {
+        this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
         this.nit = nit;
         this.telefono = telefono;
         this.empleado1 = empleado1;
+    }
+
+    public void setId(long id){
+        this.id = id;
+    }
+
+    public long getId(){
+        return id;
     }
 
     public String getNombre() {
@@ -61,11 +79,11 @@ public class Empresa {
         this.nit = nit;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -89,4 +107,5 @@ public class Empresa {
                 ", empleado1=" + empleado1 +
                 '}';
     }
+
 }
